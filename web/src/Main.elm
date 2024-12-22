@@ -6,7 +6,9 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onInput, onSubmit)
 
 
+
 -- MAIN
+
 
 main : Program () Model Msg
 main =
@@ -18,7 +20,9 @@ main =
         }
 
 
+
 -- MODEL
+
 
 type alias Model =
     { draft : String
@@ -35,7 +39,9 @@ init _ =
     )
 
 
+
 -- UPDATE
+
 
 type Msg
     = DraftChanged String
@@ -59,7 +65,9 @@ update msg model =
             )
 
 
+
 -- VIEW
+
 
 view : Model -> Html Msg
 view model =
