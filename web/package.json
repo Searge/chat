@@ -4,7 +4,18 @@
   "description": "Pnpm based ELM project for a chat app",
   "main": "public/main.js",
   "scripts": {
-    "build": "elm make src/Main.elm --optimize --output=public/main.js"
+    "clean": "rm -rf public/*",
+    "build:elm": "elm make src/Main.elm --optimize --output=public/main.js",
+    "build:sass": "sass src/sass/main.scss:public/styles.css --style compressed",
+    "build:html": "node src/scripts/build-html.js",
+    "copy:assets": "cpx \"src/assets/**/*\" public",
+    "minify": "uglifyjs public/main.js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters' | esbuild --minify --target=es5 > public/main.min.js",
+    "build": "pnpm clean && pnpm build:elm && pnpm minify && pnpm build:sass && pnpm build:html && pnpm copy:assets",
+    "watch:elm": "chokidar \"src/**/*.elm\" -c \"pnpm run build:elm\"",
+    "watch:sass": "sass src/sass:public --watch",
+    "watch:html": "chokidar \"src/templates/**/*.html\" -c \"pnpm run build:html\"",
+    "watch:assets": "chokidar \"src/assets/**/*\" -c \"pnpm run copy:assets\"",
+    "dev": "pnpm run build && pnpm run watch:elm & pnpm run watch:sass & pnpm run watch:html & pnpm run watch:assets"
   },
   "keywords": [
     "Pnpm",
@@ -15,7 +26,12 @@
   "license": "LGPL-3.0-or-later",
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
+    "cpx": "^1.5.0",
     "elm": "0.19.1-6",
-    "prettier": "^3.4.2"
+    "esbuild": "^0.24.2",
+    "html-minifier-terser": "^7.2.0",
+    "prettier": "^3.4.2",
+    "sass": "^1.83.0",
+    "uglify-js": "^3.19.3"
   }
 }
