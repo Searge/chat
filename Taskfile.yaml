@@ -1,0 +1,22 @@
+version: "3"
+
+tasks:
+  pnpm:install:
+    aliases: [pi]
+    desc: Install dependencies for pnpm
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions: ['test -f pnpm-lock.yaml']
+    commands:
+      - pnpm i
+
+  elm:build:
+    aliases: [eb]
+    desc: Compile Elm files to HTML
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - pnpm build
+
+  clean:
+    desc: Clean the `public` directory
+    cmds:
+      - rm -rf web/public/*
