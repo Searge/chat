@@ -1,12 +1,21 @@
 {
-  "name": "web",
+  "name": "chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pnpm based ELM project for a chat app",
   "main": "public/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "elm make src/Main.elm --optimize --output=public/main.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "Pnpm",
+    "Elm",
+    "Chat"
+  ],
+  "author": "Searge Boremchuk",
+  "license": "LGPL-3.0-or-later",
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "elm": "0.19.1-6",
+    "prettier": "^3.4.2"
+  }
 }
